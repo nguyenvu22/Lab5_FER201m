@@ -77,14 +77,35 @@ class Menu extends Component {
         else return <div></div>;
     }
 
+    renderDishDetail(dish) {
+        if (dish != null)
+            return (
+                <Card>
+                    {dish.comments.map((items) => {
+                        if (dish.id == items.id) {
+                            return (
+                                <div>
+                                    <h1>{dish.name} Detail !!</h1>
+                                    <p>{items.comment}</p>
+                                    <p>{items.author}</p>
+                                    <p>{items.date}</p>
+                                </div>
+                            );
+                        }
+                    })}
+                </Card>
+            );
+        else return <div></div>;
+    }
+
     render() {
         const menu = this.props.dishes.map((dish) => {
             return (
                 <div className="col-12 col-md-5 m-1">
                     <Card key={dish.id} onClick={() => this.onDishSelect(dish)}>
-                        <CardImg width="100%" src={dish.image} alt={dish.name} />
+                        <CardImg width="50%" src={dish.image} alt={dish.name} />
                         <CardImgOverlay>
-                            <CardTitle>{dish.name} - {dish.id}</CardTitle>
+                            <CardTitle>{dish.name}</CardTitle>
                         </CardImgOverlay>
                     </Card>
                 </div>
@@ -97,6 +118,9 @@ class Menu extends Component {
                 <div className="row">
                     <div className="col-12 col-md-5 m-1">
                         {this.renderDish(this.state.selectedDish)}
+                    </div>
+                    <div className="col-12 col-md-5 m-1">
+                        {this.renderDishDetail(this.state.selectedDish)}
                     </div>
                 </div>
             </div>
