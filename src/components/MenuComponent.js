@@ -8,6 +8,8 @@ import {
     CardText,
     CardBody,
     CardTitle,
+    Row,
+    Col,
 } from "reactstrap";
 
 import DishDetail from './DishDetailComponent';
@@ -29,20 +31,20 @@ class Menu extends Component {
     render() {
         const menu = this.props.dishes.map((dish) => {
             return (
-                <div className="col-12 col-md-5 m-1">
+                <Col md="5" className="m-2">
                     <Card key={dish.id} onClick={() => this.onDishSelect(dish)}>
-                        <CardImg width="50%" src={dish.image} alt={dish.name} />
+                        <CardImg src={dish.image} alt={dish.name} />
                         <CardImgOverlay>
-                            <CardTitle>{dish.name}</CardTitle>
+                            <CardTitle tag="h2" className="text-dark text-center border border-info badge-pill bg-secondary">{dish.name}</CardTitle>
                         </CardImgOverlay>
                     </Card>
-                </div>
+                </Col>
             );
         });
 
         return (
             <div className="container">
-                <div className="row">{menu}</div>
+                <Row className="justify-content-center mb-3">{menu}</Row>
                 <DishDetail selectedDish={this.state.selectedDish} />
             </div>
         );

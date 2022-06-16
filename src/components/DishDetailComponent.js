@@ -1,31 +1,28 @@
 import React, { Component } from "react";
 
 import {
-    Media,
     Card,
     CardImg,
-    CardImgOverlay,
     CardText,
     CardBody,
     CardTitle,
+    Row,
+    Col,
 } from "reactstrap";
 
 class DishDetail extends Component {
     constructor(props){
         super(props);
-        // this.state = {
-        //     selectedDish: this.props.selectedDish,
-        // }
     }
 
     renderDish() {
         if (this.props.selectedDish != null)
             return (
                 <Card>
-                    <CardImg top src={this.props.selectedDish.image} alt={this.props.selectedDish.name} />
+                    <CardImg src={this.props.selectedDish.image} alt={this.props.selectedDish.name} />
                     <CardBody>
-                        <CardTitle>{this.props.selectedDish.name}</CardTitle>
-                        <CardText>{this.props.selectedDish.description}</CardText>
+                        <CardTitle tag="h2" className="text-center">{this.props.selectedDish.name}</CardTitle>
+                        <CardText tag="label"><strong>Description : </strong>{this.props.selectedDish.description}</CardText>
                     </CardBody>
                 </Card>
             );
@@ -39,12 +36,12 @@ class DishDetail extends Component {
                     {this.props.selectedDish.comments.map((items) => {
                         if (this.props.selectedDish.id == items.id) {
                             return (
-                                <div>
-                                    <h1>{this.props.selectedDish.name} Detail !!</h1>
-                                    <p>{items.comment}</p>
-                                    <p>{items.author}</p>
-                                    <p>{items.date}</p>
-                                </div>
+                                <CardText className="p-5">
+                                    <h2 className="text-center mb-5 border border-danger rounded p-3"><strong>{this.props.selectedDish.name}</strong> Detail !!</h2>
+                                    <p><strong>Comments :</strong> {items.comment}</p>
+                                    <p><strong>Author :</strong>  {items.author}</p>
+                                    <p><strong>Date :</strong>  {items.date}</p>
+                                </CardText>
                             );
                         }
                     })}
@@ -56,15 +53,15 @@ class DishDetail extends Component {
 
     render() {
         return(
-            <div className="row">
+            <Row className="">
                 {console.log(this.props.selectedDish)}
-                <div className="col-12 col-md-5 m-1">
+                <Col md="6" className="mb-2">
                     {this.renderDish()}
-                </div>
-                <div className="col-12 col-md-5 m-1">
+                </Col>
+                <Col md="6" className="mb-2">
                     {this.renderDishDetail()}
-                </div>
-            </div>
+                </Col>
+            </Row>
         )
     }
 }
